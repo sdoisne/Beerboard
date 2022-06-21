@@ -51,6 +51,4 @@ public class BeersController {
         pModel.addAttribute("listType", listType);
         return "add-beer";
     }
-
-    // COMMIT DU 21/06/2022 à 14H
 }

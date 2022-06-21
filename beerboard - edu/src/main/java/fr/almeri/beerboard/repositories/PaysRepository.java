@@ -27,6 +27,4 @@ public interface PaysRepository extends CrudRepository<Pays, String> {
     @Query("SELECT p.production FROM Pays p ORDER BY p.nomPays ASC")
     public ArrayList<Integer> getProductionPays();
 
-    // COMMIT DU 21/06/2022 à 14H
-
 }

@@ -53,6 +53,4 @@ public class BreweriesController {
         pModel.addAttribute("listRegion", ListRegion);
         return "add-brewery";
     }
-
-    // COMMIT DU 21/06/2022 à 14H
 }

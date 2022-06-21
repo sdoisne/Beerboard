@@ -16,5 +16,4 @@ public interface BrasserieRepository extends CrudRepository<Brasserie, String> {
     @Query("SELECT COUNT(b.codeBrasserie) FROM Brasserie b GROUP BY b.region.nomRegion ORDER BY b.region.nomRegion")
     public Integer [] getRepartitionBrasserieParRegion();
 
-    // COMMIT DU 21/06/2022 à 14H
 }

@@ -14,6 +14,4 @@ public class ProfileController {
         /*TODO*/
         return "";
     }
-
-    // COMMIT DU 21/06/2022 à 14H
 }
