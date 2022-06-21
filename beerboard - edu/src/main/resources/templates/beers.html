@@ -28,7 +28,7 @@
             <div class="container-fluid px-4">
                 <h1 class="mt-4">Liste des bières</h1>
                 <ol class="breadcrumb mb-4">
-                    <li class="breadcrumb-item"><a href="index.html">Dashboard</a></li>
+                    <li class="breadcrumb-item"><a th:href="@{/index}">Dashboard</a></li>
                     <li class="breadcrumb-item active">Liste des bières</li>
                 </ol>
                 <div class="card mb-4">
@@ -49,7 +49,7 @@
                                 <th> Couleur de la bière</th>
                                 <th> Taux d'alcool</th>
                                 <th> Caractéristiques</th>
-                                <th> Voir fiche bière</th>
+                                <th> </th>
                             </tr>
                             </thead>
                             <tbody>
@@ -61,7 +61,7 @@
                                 <td><span th:text="${biere.getCouleurBiere()}">  </span></td>
                                 <td><span th:text="${biere.getTauxAlcool()}">  </span></td>
                                 <td><span th:text="${biere.getCaracteristiques()}">  </span></td>
-                                <td><a href="#"> </a></td>
+                                <td><a class="nav-link" th:href="@{'/see-beer?marque='+${biere.getMarque().getNomMarque()}+'&version='+${biere.getVersion()}}"> <i class="fa fa-eye" style="color:blue"></i> </a></td>
                             </tr>
                             </tbody>
                         </table>

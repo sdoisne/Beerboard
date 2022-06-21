@@ -35,7 +35,7 @@ public class IndexController {
     @Autowired
     private BrasserieRepository brasserieRepository;
 
-    @GetMapping("/")
+    @GetMapping("/index")
     public String home(Model pModel, HttpSession pSession){
         pModel.addAttribute("bieres", 328);
         pModel.addAttribute("brasseries", 99);

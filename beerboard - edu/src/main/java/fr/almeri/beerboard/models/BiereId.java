@@ -7,6 +7,16 @@ import java.io.Serializable;
 import java.util.Objects;
 
 public class BiereId implements Serializable {
+
+    public BiereId() {
+
+    }
+
+    public BiereId(Marque marque, String version) {
+        // A partir d'une chaine de caractère nomMarque, on créé un objet Marque
+        this.marque = marque;
+        this.version = version;
+    }
     @Id
     @OneToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "nom_marque") // Permet de définir la colonne qui possède une clef étrangère

@@ -1,11 +1,17 @@
 package fr.almeri.beerboard.controllers;
 
-import fr.almeri.beerboard.models.Biere;
+import fr.almeri.beerboard.models.*;
 import fr.almeri.beerboard.repositories.BiereRepository;
+import fr.almeri.beerboard.repositories.BrasserieRepository;
+import fr.almeri.beerboard.repositories.MarqueRepository;
+import fr.almeri.beerboard.repositories.TypeRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import java.util.ArrayList;
 
@@ -15,6 +21,13 @@ public class BeersController {
     @Autowired
     private BiereRepository biereRepository;
 
+    @Autowired
+    private MarqueRepository marqueRepository;
+
+    @Autowired
+    private TypeRepository typeRepository;
+
+
     @GetMapping("/beers")
     public String getListeBieres(Model pModel) {
         ArrayList<Biere> listBieresFromDatabase = (ArrayList<Biere>) biereRepository.findAll();
@@ -22,19 +35,20 @@ public class BeersController {
         return "beers";
     }
 
-    @GetMapping("/add-beer")
-    public String getNouvelleBiere(Model pModel) {
-//        biereRepository.save(Biere);
-//        pModel.addAttribute("NouvelleBiere", nouvelleBiere);
-        return "add-beer";
-    }
 
     @GetMapping("/see-beer")
-    public String getFicheBiere(Model pModel) {
-//        String [] ficheBiere = biereRepository.findById();
-//        pModel.addAttribute("ficheBiere", ficheBiere);
+    public String getFicheBiere(Model pModel, @RequestParam(required = true) String marque, @RequestParam(required = true) String version) {
+        BiereId biereId = new BiereId(new Marque(marque),version);
+        pModel.addAttribute("biere", biereRepository.findById(biereId).orElseThrow());
         return "see-beer";
     }
 
-
+    @GetMapping("/add-beer")
+    public String getNouvelleBrasserie(Model pModel){
+        ArrayList<Marque> listMarque = (ArrayList<Marque>) marqueRepository.findAll();
+        pModel.addAttribute("listMarque", listMarque);
+        ArrayList<Type> listType = (ArrayList<Type>) typeRepository.findAll();
+        pModel.addAttribute("listType", listType);
+        return "add-beer";
+    }
 }

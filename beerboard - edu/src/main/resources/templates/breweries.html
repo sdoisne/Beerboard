@@ -28,7 +28,7 @@
             <div class="container-fluid px-4">
                 <h1 class="mt-4">Liste des brasseries</h1>
                 <ol class="breadcrumb mb-4">
-                    <li class="breadcrumb-item"><a href="index.html">Dashboard</a></li>
+                    <li class="breadcrumb-item"><a th:href="@{/index}">Dashboard</a></li>
                     <li class="breadcrumb-item active">Liste des brasseries</li>
                 </ol>
                 <div class="card mb-4">
@@ -47,7 +47,7 @@
                                 <th> Nom brasserie</th>
                                 <th> Ville</th>
                                 <th> Region</th>
-                                <th> Voir fiche brasserie </th>
+                                <th> </th>
                             </tr>
                             </thead>
                             <tbody>
@@ -57,7 +57,7 @@
                                 <td><span th:text="${brasserie.getNomBrasserie()}"> </span></td>
                                 <td><span th:text="${brasserie.getVille()}">  </span></td>
                                 <td><span th:text="${brasserie.getRegion().getNomRegion()}">  </span></td>
-                                <td><a href="#"> </a></td>
+                                <td><a class="nav-link" th:href="@{'/see-brewery/'+${brasserie.getCodeBrasserie()}}"> <i class="fa fa-eye" style="color:blue"></i> </a></td>
                             </tr>
                             </tbody>
                         </table>
