@@ -88,4 +88,5 @@ public class ExampleController {
         // Ici, example.html se trouvant de le répertoire /templates
             return "example";
     }
+    // COMMIT DU 21/06/2022 à 14H
 }

@@ -77,4 +77,6 @@ public class IndexController {
         return "redirect:/";
     }
 
+    // COMMIT DU 21/06/2022 à 14H
+
 }

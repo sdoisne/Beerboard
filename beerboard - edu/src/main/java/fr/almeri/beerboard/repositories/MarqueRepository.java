@@ -11,4 +11,6 @@ public interface MarqueRepository extends CrudRepository<Marque, String> {
 
     @Query("SELECT COUNT(m.nomMarque) FROM Marque m GROUP BY m.brasserie.codeBrasserie ORDER BY m.brasserie.nomBrasserie")
     public Integer [] getNombreMarquesParBrasserie();
+
+    // COMMIT DU 21/06/2022 à 14H
 }

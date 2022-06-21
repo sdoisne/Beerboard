@@ -11,4 +11,6 @@ import java.util.ArrayList;
 // extends CrudRepository<NomDeLaClasse, TypeID>
 @Repository
 public interface RegionRepository extends CrudRepository<Region, String> {
+
+    // COMMIT DU 21/06/2022 à 14H
 }
