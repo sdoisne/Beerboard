@@ -8,10 +8,7 @@ import fr.almeri.beerboard.repositories.TypeRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.ArrayList;
 
@@ -50,5 +47,11 @@ public class BeersController {
         ArrayList<Type> listType = (ArrayList<Type>) typeRepository.findAll();
         pModel.addAttribute("listType", listType);
         return "add-beer";
+    }
+
+    @PostMapping("/valid-beer")
+    public String addNouvelleBiere(@ModelAttribute Biere biere){
+        biereRepository.save(biere);
+        return "redirect:/beers";
     }
 }

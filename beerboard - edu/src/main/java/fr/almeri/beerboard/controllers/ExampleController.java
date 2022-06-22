@@ -87,5 +87,5 @@ public class ExampleController {
         // Méthode permettant d'indiquer quelle page HTML est renvoyée
         // Ici, example.html se trouvant de le répertoire /templates
             return "example";
-    }H
+    }
 }
