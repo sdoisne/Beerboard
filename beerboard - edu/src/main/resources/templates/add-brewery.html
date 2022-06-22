@@ -42,7 +42,7 @@
                                 <div class="card">
                                     <div class="card-header"><strong>Ajouter une brasserie</strong></div>
                                     <div class="card-body">
-                                        <span th:text="${msg}" th:if="${msg}"></span>
+                                        <span th:text="${msg}" th:if="${msg}" style="color:red"></span>
                                         <br>
                                         <form th:action="@{/valid-brewery}" method="post">
                                             <div class="form-group">

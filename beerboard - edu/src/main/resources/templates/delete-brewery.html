@@ -34,18 +34,20 @@
                 </ol>
                 <div class="card mb-4">
                 </div>
+                <span th:text="${msg}" th:if="${msg}" style="color:red"></span>
+                <br>
                 <form th:action="@{/drop-brewery}" method="post">
 
-                <div class="content mt-3">
-                    <div class="animated fadeIn">
+                    <div class="content mt-3">
+                        <div class="animated fadeIn">
 
-                        <div class="row">
+                            <div class="row">
 
-                            <div class="col-md-12">
+                                <div class="col-md-12">
 
-                                <div class="card">
-                                    <div class="card-header"><strong>Brasserie</strong></div>
-                                    <div class="card-body">
+                                    <div class="card">
+                                        <div class="card-header"><strong>Brasserie</strong></div>
+                                        <div class="card-body">
                                             <div class="form-group">
                                                 <label class="form-control-label"> Identifiant de la brasserie
                                                     : </label>
@@ -73,38 +75,38 @@
                                                 <button type="submit" formmethod="post"> Supprimer
                                                 </button>
                                             </div>
+                                        </div>
+
                                     </div>
 
                                 </div>
-
-                            </div>
-                            <div class="card mb-12">
-                                <div class="card-header">
-                                    <i class="fas fa-table me-1"></i>
-                                    Liste des bieres
+                                <div class="card mb-12">
+                                    <div class="card-header">
+                                        <i class="fas fa-table me-1"></i>
+                                        Liste des bieres
+                                    </div>
+                                    <div class="card-body">
+                                        <table id="datatablesSimple">
+                                            <thead>
+                                            <tr>
+                                                <!-- Les intitulés de colonne -->
+                                                <th> Marque</th>
+                                                <th> Version</th>
+                                            </tr>
+                                            </thead>
+                                            <tbody>
+                                            <!-- Les valeur dans chaque ligne de chaque colonne -->
+                                            <tr th:each="biere : ${bieres}">
+                                                <td><span th:text="${biere.getMarque().getNomMarque()}"> </span></td>
+                                                <td><span th:text="${biere.getVersion()}"> </span></td>
+                                            </tr>
+                                            </tbody>
+                                        </table>
+                                    </div>
                                 </div>
-                                <div class="card-body">
-                                    <table id="datatablesSimple">
-                                        <thead>
-                                        <tr>
-                                            <!-- Les intitulés de colonne -->
-                                            <th> Marque</th>
-                                            <th> Version</th>
-                                        </tr>
-                                        </thead>
-                                        <tbody>
-                                        <!-- Les valeur dans chaque ligne de chaque colonne -->
-                                        <tr th:each="biere : ${bieres}">
-                                            <td><span th:text="${biere.getMarque().getNomMarque()}"> </span></td>
-                                            <td><span th:text="${biere.getVersion()}"> </span></td>
-                                        </tr>
-                                        </tbody>
-                                    </table>
-                                </div>
-                            </div>
-                        </div><!-- .animated -->
-                    </div><!-- .content -->
-                </div>
+                            </div><!-- .animated -->
+                        </div><!-- .content -->
+                    </div>
                 </form>
 
             </div>

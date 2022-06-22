@@ -92,8 +92,19 @@ public class BreweriesController {
     }
 
     @PostMapping("/drop-brewery")
-    public String deleteBrasserie(@ModelAttribute Brasserie brasserie){
-        brasserieRepository.deleteById(brasserie.getCodeBrasserie());
-        return "redirect:/breweries";
+    public String deleteBrasserie(@ModelAttribute Brasserie brasserie, Model pModel, RedirectAttributes redir){
+
+        ArrayList<Biere> bieres = biereRepository.getListeMarquesVersions(brasserie.getCodeBrasserie());
+        pModel.addAttribute("bieres", bieres);
+
+        boolean existance = bieres.isEmpty();
+
+        if (existance) {
+            brasserieRepository.deleteById(brasserie.getCodeBrasserie());
+            return "redirect:/breweries";
+        } else {
+            redir.addFlashAttribute("msg","La brasserie ne peut être supprimée car des bières lui sont encore associées.");
+            return "redirect:/delete-brewery/" + brasserie.getCodeBrasserie();
+        }
     }
 }

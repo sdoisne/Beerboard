@@ -104,8 +104,8 @@
                                             </div>
                                             <div class="form-group">
                                                 <label class="form-control-label"> Caractéristiques : </label>
-                                                <input class="form-control" type="text" name="caracteristiques"
-                                                       th:value="${biere.getCaracteristiques()}"
+                                                <input class="form-control" name="caracteristiques"
+                                                       th:value="${biere.getCaracteristiques()} != null ? ${biere.getCaracteristiques()} : 'Pas de caractéristique'"
                                                 >
                                             </div>
                                             <br>
@@ -116,7 +116,7 @@
                                     <div class="card">
                                         <div class="card-header"><strong>Type de bière</strong></div>
                                         <div class="card-body">
-                                            <div class="form-group">
+                                            <div class="form-group" hidden>
                                                 <label class="form-control-label"> Numéro de type : </label>
                                                 <input class="form-control" type="number" name="noTypeStr"
                                                        th:value="${biere.getType().getNoTypeStr()}"
