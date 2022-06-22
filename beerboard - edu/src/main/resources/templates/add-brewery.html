@@ -15,7 +15,7 @@
 <nav class="sb-topnav navbar navbar-expand navbar-dark bg-dark">
 
     <!-- Navbar Brand-->
-    <a class="navbar-brand ps-3" href="index.html">Beerboard</a>
+    <a class="navbar-brand ps-3" th:href="@{/index}">Beerboard</a>
 
     <!-- Sidebar Toggle-->
     <button class="btn btn-link btn-sm order-1 order-lg-0 me-4 me-lg-0" id="sidebarToggle" href="#!"><i
@@ -42,6 +42,8 @@
                                 <div class="card">
                                     <div class="card-header"><strong>Ajouter une brasserie</strong></div>
                                     <div class="card-body">
+                                        <span th:text="${msg}" th:if="${msg}"></span>
+                                        <br>
                                         <form th:action="@{/valid-brewery}" method="post">
                                             <div class="form-group">
                                                 <label class="form-control-label"> Identifiant de la brasserie *</label>

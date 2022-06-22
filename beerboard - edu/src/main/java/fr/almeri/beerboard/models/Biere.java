@@ -31,7 +31,6 @@ public class Biere implements Serializable {
     private Double tauxAlcool;
     @Column(name = "caracteristiques")
     private String caracteristiques;
-//    private String noTypeStr;
 
     public Biere(){
 
@@ -84,14 +83,6 @@ public class Biere implements Serializable {
     public void setCaracteristiques(String pCaracteristiques) {
         this.caracteristiques = pCaracteristiques;
     }
-
-//    public String getNoTypeStr() {
-//        return noTypeStr;
-//    }
-//
-//    public void setNoTypeStr(String pNoTypeStr) {
-//        this.noTypeStr = pNoTypeStr;
-//    }
 
     @Override
     public boolean equals(Object o) {

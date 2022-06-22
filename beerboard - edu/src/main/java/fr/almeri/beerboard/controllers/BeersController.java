@@ -9,6 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import java.util.ArrayList;
 
@@ -64,15 +65,22 @@ public class BeersController {
     }
 
     @PostMapping("/valid-beer")
-    public String addNouvelleBiere(@ModelAttribute Biere biere){
-        biereRepository.save(biere);
-        return "redirect:/beers";
+    public String addNouvelleBiere(@ModelAttribute Biere biere, RedirectAttributes redir){
+        BiereId id = new BiereId(biere.getMarque(), biere.getVersion());
+        if (!biereRepository.existsById(id)) {
+            biereRepository.save(biere);
+            return "redirect:/beers";
+        } else {
+            redir.addFlashAttribute("msg", "Une bière de cette marque avec cette version existe déjà, veuillez saisir une nouvelle version.");
+            return "redirect:/add-beer";
+        }
     }
 
     @PostMapping("/update-beer")
-    public String updateBiere(@ModelAttribute Type type,Biere biere){
-        typeRepository.save(type);
-        biere.setType(type);
+    public String updateBiere(@ModelAttribute Biere biere){
+        BiereId id = new BiereId(biere.getMarque(), biere.getVersion());
+        Biere oldBiere = biereRepository.findById(id).orElseThrow();
+        biere.setType(oldBiere.getType());
         biereRepository.save(biere);
         return "redirect:/beers";
     }

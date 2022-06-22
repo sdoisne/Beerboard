@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import java.util.ArrayList;
 
@@ -74,9 +75,14 @@ public class BreweriesController {
     }
 
     @PostMapping("/valid-brewery")
-    public String addNouvelleBrasserie(@ModelAttribute Brasserie brasserie){
-        brasserieRepository.save(brasserie);
-        return "redirect:/breweries";
+    public String addNouvelleBrasserie(@ModelAttribute Brasserie brasserie, RedirectAttributes redir){
+        if (!brasserieRepository.existsById(brasserie.getCodeBrasserie())){
+            brasserieRepository.save(brasserie);
+            return "redirect:/breweries";
+        } else{
+            redir.addFlashAttribute("msg", "L'identifiant de la brasserie existe déjà, veuillez en saisir un nouveau ou vérifier que cette brasserie n'existe pas déjà.");
+            return "redirect:/add-brewery";
+        }
     }
 
     @PostMapping("/update-brewery")
