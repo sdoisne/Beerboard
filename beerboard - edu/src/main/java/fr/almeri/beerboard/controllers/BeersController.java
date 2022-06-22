@@ -34,10 +34,24 @@ public class BeersController {
 
 
     @GetMapping("/see-beer")
-    public String getFicheBiere(Model pModel, @RequestParam(required = true) String marque, @RequestParam(required = true) String version) {
+    public String getFicheBiereConsultation(Model pModel, @RequestParam(required = true) String marque, @RequestParam(required = true) String version) {
         BiereId biereId = new BiereId(new Marque(marque),version);
         pModel.addAttribute("biere", biereRepository.findById(biereId).orElseThrow());
         return "see-beer";
+    }
+
+    @GetMapping("/modify-beer")
+    public String getFicheBiereModification(Model pModel, @RequestParam(required = true) String marque, @RequestParam(required = true) String version) {
+        BiereId biereId = new BiereId(new Marque(marque),version);
+        pModel.addAttribute("biere", biereRepository.findById(biereId).orElseThrow());
+        return "modify-beer";
+    }
+
+    @GetMapping("/delete-beer")
+    public String getFicheBiereSuppression(Model pModel, @RequestParam(required = true) String marque, @RequestParam(required = true) String version) {
+        BiereId biereId = new BiereId(new Marque(marque),version);
+        pModel.addAttribute("biere", biereRepository.findById(biereId).orElseThrow());
+        return "delete-beer";
     }
 
     @GetMapping("/add-beer")
@@ -52,6 +66,20 @@ public class BeersController {
     @PostMapping("/valid-beer")
     public String addNouvelleBiere(@ModelAttribute Biere biere){
         biereRepository.save(biere);
+        return "redirect:/beers";
+    }
+
+    @PostMapping("/update-beer")
+    public String updateBiere(@ModelAttribute Type type,Biere biere){
+        typeRepository.save(type);
+        biere.setType(type);
+        biereRepository.save(biere);
+        return "redirect:/beers";
+    }
+
+    @PostMapping("/drop-beer")
+    public String deleteBiere(@ModelAttribute Biere biere){
+        biereRepository.deleteById(new BiereId(biere.getMarque(), biere.getVersion()));
         return "redirect:/beers";
     }
 }

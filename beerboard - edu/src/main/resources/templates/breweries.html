@@ -47,7 +47,9 @@
                                 <th> Nom brasserie</th>
                                 <th> Ville</th>
                                 <th> Region</th>
-                                <th> </th>
+                                <th> Fiche détaillée</th>
+                                <th> Modifier</th>
+                                <th> Supprimer</th>
                             </tr>
                             </thead>
                             <tbody>
@@ -58,6 +60,8 @@
                                 <td><span th:text="${brasserie.getVille()}">  </span></td>
                                 <td><span th:text="${brasserie.getRegion().getNomRegion()}">  </span></td>
                                 <td><a class="nav-link" th:href="@{'/see-brewery/'+${brasserie.getCodeBrasserie()}}"> <i class="fa fa-eye" style="color:blue"></i> </a></td>
+                                <td><a class="nav-link" th:href="@{'/modify-brewery/'+${brasserie.getCodeBrasserie()}}"> <i class="fa fa-pencil" style="color:blue"></i> </a></td>
+                                <td><a class="nav-link" th:href="@{'/delete-brewery/'+${brasserie.getCodeBrasserie()}}"> <i class="fa fa-trash" style="color:blue"></i> </a></td>
                             </tr>
                             </tbody>
                         </table>

@@ -34,111 +34,119 @@
                 </ol>
                 <div class="card mb-4">
                 </div>
-                <div class="content mt-3">
-                    <div class="animated fadeIn">
+                <form th:action="@{/modify-beer}" method="post">
+                    <div class="content mt-3">
+                        <div class="animated fadeIn">
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <div class="card">
+                                        <div class="card-header"><strong>Marque et brasserie</strong></div>
+                                        <div class="card-body">
 
-                        <div class="row">
-
-                            <div class="col-md-6">
-
-                                <div class="card">
-                                    <div class="card-header"><strong>Marque et brasserie</strong></div>
-                                    <div class="card-body">
-                                        <form action="index.php" method="GET">
                                             <div class="form-group">
                                                 <label class="form-control-label"> Nom de la marque : </label>
-                                                                                                <input class="form-control"
-                                                                                                       type="text"
-                                                                                                       name="reference"
-                                                                                                       th:value="${biere.getMarque().getNomMarque()}">
+                                                <input class="form-control"
+                                                       type="text"
+                                                       name="reference"
+                                                       th:value="${biere.getMarque().getNomMarque()}"
+                                                       disabled>
                                             </div>
                                             <div class="form-group">
                                                 <label class="form-control-label"> Identifiant de la brasserie
                                                     : </label>
-                                                                                                <input class="form-control" type="text" name="identifiant"
-                                                                                                       th:value="${biere.getMarque().getBrasserie().getCodeBrasserie()}">
+                                                <input class="form-control" type="text" name="identifiant"
+                                                       th:value="${biere.getMarque().getBrasserie().getCodeBrasserie()}"
+                                                       disabled>
                                             </div>
                                             <div class="form-group">
                                                 <label class="form-control-label"> Nom de la brasserie : </label>
-                                                                                                <input class="form-control" type="texte" name="nom"
-                                                                                                       th:value="${biere.getMarque().getBrasserie().getNomBrasserie()}">
+                                                <input class="form-control" type="texte" name="nom"
+                                                       th:value="${biere.getMarque().getBrasserie().getNomBrasserie()}"
+                                                       disabled>
                                             </div>
                                             <div class="form-group">
                                                 <label class="form-control-label"> Ville : </label>
-                                                                                                <input class="form-control" type="text" name="ville"
-                                                                                                       th:value="${biere.getMarque().getBrasserie().getVille()}">
+                                                <input class="form-control" type="text" name="ville"
+                                                       th:value="${biere.getMarque().getBrasserie().getVille()}"
+                                                       disabled>
                                             </div>
                                             <div class="form-group">
                                                 <label class="form-control-label"> Région : </label>
-                                                                                                <input class="form-control" type="text" name="région"
-                                                                                                       th:value="${biere.getMarque().getBrasserie().getRegion().getNomRegion()}">
+                                                <input class="form-control" type="text" name="région"
+                                                       th:value="${biere.getMarque().getBrasserie().getRegion().getNomRegion()} + '-' + ${biere.getMarque().getBrasserie().getRegion().getNomPays()}"
+                                                       disabled>
                                             </div>
-                                        </form>
+                                        </div>
                                     </div>
                                 </div>
-                            </div>
-                            <div class="col-md-6">
-                                <div class="card">
-                                    <div class="card-header"><strong>Détails</strong></div>
-                                    <div class="card-body">
+                                <div class="col-md-6">
+                                    <div class="card">
+                                        <div class="card-header"><strong>Détails</strong></div>
+                                        <div class="card-body">
                                             <div class="form-group">
                                                 <label class="form-control-label"> Version : </label>
-                                                                                                <input class="form-control" type="text" name="version"
-                                                                                                       th:value="${biere.getVersion()}">
+                                                <input class="form-control" type="text" name="version"
+                                                       th:value="${biere.getVersion()}"
+                                                       disabled>
                                             </div>
                                             <div class="form-group">
                                                 <label class="form-control-label"> Couleur de la bière
                                                     : </label>
-                                                                                                <input class="form-control" type="text" name="couleur"
-                                                                                                       th:value="${biere.getCouleurBiere()}">
+                                                <input class="form-control" type="text" name="couleur"
+                                                       th:value="${biere.getCouleurBiere()}"
+                                                       disabled>
                                             </div>
                                             <div class="form-group">
                                                 <label class="form-control-label"> Taux d'alcool </label>
-                                                                                                <input class="form-control" type="number" name="taux"
-                                                                                                       th:value="${biere.getTauxAlcool()}">
+                                                <input class="form-control" type="text" name="taux"
+                                                       th:value="${biere.getTauxAlcool()} + ' % ' "
+                                                       disabled>
                                             </div>
                                             <div class="form-group">
                                                 <label class="form-control-label"> Caractéristiques : </label>
-                                                                                                <input class="form-control" type="text" name="caracteristiques"
-                                                                                                       th:value="${biere.getCaracteristiques()}">
+                                                <input class="form-control" type="text" name="caracteristiques"
+                                                       th:value="${biere.getCaracteristiques()}"
+                                                       disabled>
                                             </div>
-                                        </form>
+                                        </div>
                                     </div>
                                 </div>
-                            </div>
-                            <div class="col-md-12">
-                                <div class="card">
-                                    <div class="card-header"><strong>Type de bière</strong></div>
-                                    <div class="card-body">
-                                        <form action="index.php" method="GET">
+                                <div class="col-md-12">
+                                    <div class="card">
+                                        <div class="card-header"><strong>Type de bière</strong></div>
+                                        <div class="card-body">
                                             <div class="form-group">
                                                 <label class="form-control-label"> Type de bière : </label>
-                                                                                                <input class="form-control" type="text" name="type"
-                                                                                                       th:value="${biere.getType().getNomType()}">
+                                                <input class="form-control" type="text" name="type"
+                                                       th:value="${biere.getType().getNomType()}"
+                                                       disabled>
                                             </div>
                                             <div class="form-group">
                                                 <label class="form-control-label"> Description
                                                     : </label>
-                                                                                                <input class="form-control" type="text" name="description"
-                                                                                                       th:value="${biere.getType().getDescription()}">
+                                                <input class="form-control" type="text" name="description"
+                                                       th:value="${biere.getType().getDescription()}"
+                                                       disabled>
                                             </div>
                                             <div class="form-group">
                                                 <label class="form-control-label"> Fermentation </label>
-                                                                                                <input class="form-control" type="text" name="fermentation"
-                                                                                                       th:value="${biere.getType().getFermentation()}">
+                                                <input class="form-control" type="text" name="fermentation"
+                                                       th:value="${biere.getType().getFermentation()}"
+                                                       disabled>
                                             </div>
                                             <div class="form-group">
                                                 <label class="form-control-label"> Commentaire : </label>
-                                                                                                <input class="form-control" type="text" name="commentaire"
-                                                                                                       th:value="${biere.getType().getCommentaire()}">
+                                                <input class="form-control" type="text" name="commentaire"
+                                                       th:value="${biere.getType().getCommentaire()}"
+                                                       disabled>
                                             </div>
-                                        </form>
+                                        </div>
                                     </div>
                                 </div>
-                            </div>
-                        </div><!-- .animated -->
-                    </div><!-- .content -->
-                </div>
+                            </div><!-- .animated -->
+                        </div><!-- .content -->
+                    </div>
+                </form>
             </div>
         </main>
         <footer class="py-4 bg-light mt-auto">

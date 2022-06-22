@@ -1,8 +1,6 @@
 package fr.almeri.beerboard.controllers;
 
-import fr.almeri.beerboard.models.Biere;
-import fr.almeri.beerboard.models.Brasserie;
-import fr.almeri.beerboard.models.Region;
+import fr.almeri.beerboard.models.*;
 import fr.almeri.beerboard.repositories.BiereRepository;
 import fr.almeri.beerboard.repositories.BrasserieRepository;
 import fr.almeri.beerboard.repositories.RegionRepository;
@@ -33,7 +31,7 @@ public class BreweriesController {
     }
 
     @GetMapping("/see-brewery/{code}")
-    public String getNouvelleBrasserie(Model pModel, @PathVariable String code) {
+    public String getFicheBrasserieConsultation(Model pModel, @PathVariable String code) {
 
         Brasserie brasserie = brasserieRepository.findById(code).orElseThrow();
         pModel.addAttribute("brasserie", brasserie);
@@ -42,6 +40,30 @@ public class BreweriesController {
         pModel.addAttribute("bieres", bieres);
 
         return "see-brewery";
+    }
+
+    @GetMapping("/modify-brewery/{code}")
+    public String getFicheBrasserieModification(Model pModel, @PathVariable String code) {
+
+        Brasserie brasserie = brasserieRepository.findById(code).orElseThrow();
+        pModel.addAttribute("brasserie", brasserie);
+
+        ArrayList<Biere> bieres = biereRepository.getListeMarquesVersions(code);
+        pModel.addAttribute("bieres", bieres);
+
+        return "modify-brewery";
+    }
+
+    @GetMapping("/delete-brewery/{code}")
+    public String getFicheBrasserieSuppression(Model pModel, @PathVariable String code) {
+
+        Brasserie brasserie = brasserieRepository.findById(code).orElseThrow();
+        pModel.addAttribute("brasserie", brasserie);
+
+        ArrayList<Biere> bieres = biereRepository.getListeMarquesVersions(code);
+        pModel.addAttribute("bieres", bieres);
+
+        return "delete-brewery";
     }
 
     @GetMapping("/add-brewery")
@@ -54,6 +76,18 @@ public class BreweriesController {
     @PostMapping("/valid-brewery")
     public String addNouvelleBrasserie(@ModelAttribute Brasserie brasserie){
         brasserieRepository.save(brasserie);
+        return "redirect:/breweries";
+    }
+
+    @PostMapping("/update-brewery")
+    public String updateBrasserie(@ModelAttribute Brasserie brasserie){
+        brasserieRepository.save(brasserie);
+        return "redirect:/breweries";
+    }
+
+    @PostMapping("/drop-brewery")
+    public String deleteBrasserie(@ModelAttribute Brasserie brasserie){
+        brasserieRepository.deleteById(brasserie.getCodeBrasserie());
         return "redirect:/breweries";
     }
 }

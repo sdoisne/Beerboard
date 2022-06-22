@@ -70,7 +70,7 @@
                                             <div class="form-group">
                                                 <label class="form-control-label"> Taux d'alcool * </label>
                                                 <input class="form-control"
-                                                       type="text"
+                                                       type="number" step = "0.01"
                                                        name="tauxAlcool">
                                             </div>
                                             <div class="form-group">
@@ -81,11 +81,11 @@
                                             </div>
                                             <br>
                                             <div class="form-group">
-                                                <button type="submit" formmethod="post"> Ajouter la nouvelle bière
-                                                </button>
+                                                <p style="color:red"> * Les champs sont obligatoires</p>
                                             </div>
                                             <div class="form-group">
-                                                <p style="color:red"> * Les champs sont obligatoires</p>
+                                                <button type="submit" formmethod="post"> Ajouter la nouvelle bière
+                                                </button>
                                             </div>
                                         </form>
                                     </div>
