@@ -32,7 +32,7 @@ public class BreweriesController {
         if (session.getAttribute("infoConnexion") != null) {
             return "breweries";
         }
-        return "redirect:/login";
+        return "redirect:/";
     }
 
     @GetMapping("/see-brewery/{code}")
@@ -47,7 +47,7 @@ public class BreweriesController {
 
             return "see-brewery";
         }
-        return "redirect:/login";
+        return "redirect:/";
     }
 
     @GetMapping("/modify-brewery/{code}")
@@ -62,7 +62,7 @@ public class BreweriesController {
 
             return "modify-brewery";
         }
-        return "redirect:/login";
+        return "redirect:/";
     }
 
     @GetMapping("/delete-brewery/{code}")
@@ -77,7 +77,7 @@ public class BreweriesController {
         if (session.getAttribute("infoConnexion") != null) {
             return "delete-brewery";
         }
-        return "redirect:/login";
+        return "redirect:/";
     }
 
     @GetMapping("/add-brewery")
@@ -87,7 +87,7 @@ public class BreweriesController {
         if (session.getAttribute("infoConnexion") != null) {
             return "add-brewery";
         }
-        return "redirect:/login";
+        return "redirect:/";
     }
 
     @PostMapping("/valid-brewery")
@@ -101,7 +101,7 @@ public class BreweriesController {
                 return "redirect:/add-brewery";
             }
         }
-        return "redirect:/login";
+        return "redirect:/";
     }
 
     @PostMapping("/update-brewery")
@@ -110,7 +110,7 @@ public class BreweriesController {
         if (session.getAttribute("infoConnexion") != null) {
             return "redirect:/breweries";
         }
-        return "redirect:/login";
+        return "redirect:/";
     }
 
     @PostMapping("/drop-brewery")
@@ -130,6 +130,6 @@ public class BreweriesController {
                 return "redirect:/delete-brewery/" + brasserie.getCodeBrasserie();
             }
         }
-        return "redirect:/login";
+        return "redirect:/";
     }
 }

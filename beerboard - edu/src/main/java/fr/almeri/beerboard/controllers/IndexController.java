@@ -72,13 +72,13 @@ public class IndexController {
 
             return "index";
         }
-        return "redirect:/login";
+        return "redirect:/";
     }
 
     @GetMapping("/logout")
     public String logout(Model pModel, RedirectAttributes pRedirectAttributes, HttpSession pSession) {
         pSession.invalidate();
-        return "redirect:/login";
+        return "redirect:/";
     }
 
     @GetMapping("/profile")
@@ -86,6 +86,6 @@ public class IndexController {
         if (session.getAttribute("infoConnexion") != null) {
             return "profile";
         }
-        return "redirect:/login";
+        return "redirect:/";
     }
 }

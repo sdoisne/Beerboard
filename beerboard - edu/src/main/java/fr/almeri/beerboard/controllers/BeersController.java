@@ -34,7 +34,7 @@ public class BeersController {
         if (session.getAttribute("infoConnexion") != null) {
             return "beers";
         }
-        return "redirect:/login";
+        return "redirect:/";
     }
 
 
@@ -45,7 +45,7 @@ public class BeersController {
         if (session.getAttribute("infoConnexion") != null) {
             return "see-beer";
         }
-        return "redirect:/login";
+        return "redirect:/";
     }
 
     @GetMapping("/modify-beer")
@@ -55,7 +55,7 @@ public class BeersController {
         if (session.getAttribute("infoConnexion") != null) {
             return "modify-beer";
         }
-        return "redirect:/login";
+        return "redirect:/";
     }
 
     @GetMapping("/delete-beer")
@@ -65,7 +65,7 @@ public class BeersController {
         if (session.getAttribute("infoConnexion") != null) {
             return "delete-beer";
         }
-        return "redirect:/login";
+        return "redirect:/";
     }
 
     @GetMapping("/add-beer")
@@ -77,7 +77,7 @@ public class BeersController {
         if (session.getAttribute("infoConnexion") != null) {
             return "add-beer";
         }
-        return "redirect:/login";
+        return "redirect:/";
     }
 
     @PostMapping("/valid-beer")
@@ -92,7 +92,7 @@ public class BeersController {
                 return "redirect:/add-beer";
             }
         }
-        return "redirect:/login";
+        return "redirect:/";
     }
 
     @PostMapping("/update-beer")
@@ -104,7 +104,7 @@ public class BeersController {
         if (session.getAttribute("infoConnexion") != null) {
             return "redirect:/beers";
         }
-        return "redirect:/login";
+        return "redirect:/";
     }
 
     @PostMapping("/drop-beer")
@@ -113,6 +113,6 @@ public class BeersController {
         if (session.getAttribute("infoConnexion") != null) {
             return "redirect:/beers";
         }
-        return "redirect:/login";
+        return "redirect:/";
     }
 }

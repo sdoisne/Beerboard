@@ -23,7 +23,7 @@ public class ProfileController {
     @Autowired
     private UtilisateurRepository utilisateurRepository;
 
-    @GetMapping("/login")
+    @GetMapping("/")
     public String connexion(Model pModel) {
         return "login";
     }
@@ -38,7 +38,7 @@ public class ProfileController {
             }
         }
         redir.addFlashAttribute("msg", "Informations de connexion incorrect.");
-        return "redirect:/login";
+        return "redirect:/";
     }
 
     @GetMapping("/motdepasse")
@@ -52,7 +52,7 @@ public class ProfileController {
         if (userConnect != null) {
             if (utilisateur.getEmailUtilisateur().equals(userConnect.getEmailUtilisateur())) {
                 redir.addFlashAttribute("msg", "Un mail vous a été envoyé pour réinitialiser votre mot de passe.");
-                return "redirect:/login";
+                return "redirect:/";
             }
         }
         redir.addFlashAttribute("msg", "Adresse email incorrect. Vérifiez votre saisie.");
@@ -73,7 +73,7 @@ public class ProfileController {
             } else {
                 utilisateurRepository.save(utilisateur);
                 redir.addFlashAttribute("msg", "Le compte a bien été créé. Veuillez vous connecter.");
-                return "redirect:/login";
+                return "redirect:/";
             }
         } else {
             redir.addFlashAttribute("msg", "Mots de passe incorrects. Veuillez recommencer.");
