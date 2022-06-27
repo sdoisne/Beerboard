@@ -39,8 +39,8 @@
             </div>
         </div>
         <div class="sb-sidenav-footer">
-            <div class="small">Connecté en tant que:</div>
-            <span th:text="${session.email}"></span>
+            <div class="small"> Connecté en tant que: </div>
+            <span th:text="${session.infoConnexion.getNomUtilisateur()} + ' ' + ${session.infoConnexion.getPrenomUtilisateur()}"></span>
             <a th:href="@{/logout}">Déconnexion</a>
         </div>
     </nav>

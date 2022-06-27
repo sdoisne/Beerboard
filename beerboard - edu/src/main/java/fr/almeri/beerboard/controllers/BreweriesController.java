@@ -10,6 +10,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import javax.servlet.http.HttpSession;
 import java.util.ArrayList;
 
 @Controller
@@ -25,38 +26,47 @@ public class BreweriesController {
     private RegionRepository regionRepository;
 
     @GetMapping("/breweries")
-    public String getListeBrasseries(Model pModel) {
+    public String getListeBrasseries(Model pModel, HttpSession session) {
         ArrayList<Brasserie> listBrasserieFromDatabase = (ArrayList<Brasserie>) brasserieRepository.findAll();
         pModel.addAttribute("listBrasserieFromDB", listBrasserieFromDatabase);
-        return "breweries";
+        if (session.getAttribute("infoConnexion") != null) {
+            return "breweries";
+        }
+        return "redirect:/login";
     }
 
     @GetMapping("/see-brewery/{code}")
-    public String getFicheBrasserieConsultation(Model pModel, @PathVariable String code) {
+    public String getFicheBrasserieConsultation(Model pModel, HttpSession session, @PathVariable String code) {
 
         Brasserie brasserie = brasserieRepository.findById(code).orElseThrow();
         pModel.addAttribute("brasserie", brasserie);
 
         ArrayList<Biere> bieres = biereRepository.getListeMarquesVersions(code);
         pModel.addAttribute("bieres", bieres);
+        if (session.getAttribute("infoConnexion") != null) {
 
-        return "see-brewery";
+            return "see-brewery";
+        }
+        return "redirect:/login";
     }
 
     @GetMapping("/modify-brewery/{code}")
-    public String getFicheBrasserieModification(Model pModel, @PathVariable String code) {
+    public String getFicheBrasserieModification(Model pModel, HttpSession session, @PathVariable String code) {
 
         Brasserie brasserie = brasserieRepository.findById(code).orElseThrow();
         pModel.addAttribute("brasserie", brasserie);
 
         ArrayList<Biere> bieres = biereRepository.getListeMarquesVersions(code);
         pModel.addAttribute("bieres", bieres);
+        if (session.getAttribute("infoConnexion") != null) {
 
-        return "modify-brewery";
+            return "modify-brewery";
+        }
+        return "redirect:/login";
     }
 
     @GetMapping("/delete-brewery/{code}")
-    public String getFicheBrasserieSuppression(Model pModel, @PathVariable String code) {
+    public String getFicheBrasserieSuppression(Model pModel, HttpSession session, @PathVariable String code) {
 
         Brasserie brasserie = brasserieRepository.findById(code).orElseThrow();
         pModel.addAttribute("brasserie", brasserie);
@@ -64,47 +74,62 @@ public class BreweriesController {
         ArrayList<Biere> bieres = biereRepository.getListeMarquesVersions(code);
         pModel.addAttribute("bieres", bieres);
 
-        return "delete-brewery";
+        if (session.getAttribute("infoConnexion") != null) {
+            return "delete-brewery";
+        }
+        return "redirect:/login";
     }
 
     @GetMapping("/add-brewery")
-    public String getNouvelleBrasserie(Model pModel){
+    public String getNouvelleBrasserie(Model pModel, HttpSession session) {
         ArrayList<Region> ListRegion = (ArrayList<Region>) regionRepository.findAll();
         pModel.addAttribute("listRegion", ListRegion);
-        return "add-brewery";
+        if (session.getAttribute("infoConnexion") != null) {
+            return "add-brewery";
+        }
+        return "redirect:/login";
     }
 
     @PostMapping("/valid-brewery")
-    public String addNouvelleBrasserie(@ModelAttribute Brasserie brasserie, RedirectAttributes redir){
-        if (!brasserieRepository.existsById(brasserie.getCodeBrasserie())){
-            brasserieRepository.save(brasserie);
-            return "redirect:/breweries";
-        } else{
-            redir.addFlashAttribute("msg", "L'identifiant de la brasserie existe déjà, veuillez en saisir un nouveau ou vérifier que cette brasserie n'existe pas déjà.");
-            return "redirect:/add-brewery";
+    public String addNouvelleBrasserie(@ModelAttribute Brasserie brasserie, HttpSession session, RedirectAttributes redir) {
+        if (session.getAttribute("infoConnexion") != null) {
+            if (!brasserieRepository.existsById(brasserie.getCodeBrasserie())) {
+                brasserieRepository.save(brasserie);
+                return "redirect:/breweries";
+            } else {
+                redir.addFlashAttribute("msg", "L'identifiant de la brasserie existe déjà, veuillez en saisir un nouveau ou vérifier que cette brasserie n'existe pas déjà.");
+                return "redirect:/add-brewery";
+            }
         }
+        return "redirect:/login";
     }
 
     @PostMapping("/update-brewery")
-    public String updateBrasserie(@ModelAttribute Brasserie brasserie){
+    public String updateBrasserie(@ModelAttribute Brasserie brasserie, HttpSession session) {
         brasserieRepository.save(brasserie);
-        return "redirect:/breweries";
+        if (session.getAttribute("infoConnexion") != null) {
+            return "redirect:/breweries";
+        }
+        return "redirect:/login";
     }
 
     @PostMapping("/drop-brewery")
-    public String deleteBrasserie(@ModelAttribute Brasserie brasserie, Model pModel, RedirectAttributes redir){
+    public String deleteBrasserie(@ModelAttribute Brasserie brasserie, HttpSession session, Model pModel, RedirectAttributes redir) {
 
         ArrayList<Biere> bieres = biereRepository.getListeMarquesVersions(brasserie.getCodeBrasserie());
         pModel.addAttribute("bieres", bieres);
 
         boolean existance = bieres.isEmpty();
+        if (session.getAttribute("infoConnexion") != null) {
 
-        if (existance) {
-            brasserieRepository.deleteById(brasserie.getCodeBrasserie());
-            return "redirect:/breweries";
-        } else {
-            redir.addFlashAttribute("msg","La brasserie ne peut être supprimée car des bières lui sont encore associées.");
-            return "redirect:/delete-brewery/" + brasserie.getCodeBrasserie();
+            if (existance) {
+                brasserieRepository.deleteById(brasserie.getCodeBrasserie());
+                return "redirect:/breweries";
+            } else {
+                redir.addFlashAttribute("msg", "La brasserie ne peut être supprimée car des bières lui sont encore associées.");
+                return "redirect:/delete-brewery/" + brasserie.getCodeBrasserie();
+            }
         }
+        return "redirect:/login";
     }
 }

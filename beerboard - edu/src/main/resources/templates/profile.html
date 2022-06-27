@@ -47,14 +47,26 @@
                                             <label for="email" class="col-4">
                                                 Email
                                             </label>
-                                            <input disabled id="email" class="col-8" th:value="${session.email}">
+                                            <input disabled id="nomUtilisateur" class="col-8" th:value="${session.infoConnexion.getNomUtilisateur()}">
+                                        </div>
+                                        <div class="row input-form">
+                                            <label for="email" class="col-4">
+                                                Email
+                                            </label>
+                                            <input disabled id="prenomUtilisateur" class="col-8" th:value="${session.infoConnexion.getPrenomUtilisateur()}">
+                                        </div>
+                                        <div class="row input-form">
+                                            <label for="email" class="col-4">
+                                                Email
+                                            </label>
+                                            <input disabled id="email" class="col-8" th:value="${session.infoConnexion.getEmailUtilisateur()}">
                                         </div>
                                         <div class="row input-form">
                                             <label for="pass" class="col-4">
                                                 Mot de passe
                                             </label>
                                             <input disabled id="pass" type="password" class="col-8"
-                                                   th:value="${session.pass}">
+                                                   th:value="${session.infoConnexion.getMdpUtilisateur()}">
                                         </div>
                                     </div>
                                 </div>
