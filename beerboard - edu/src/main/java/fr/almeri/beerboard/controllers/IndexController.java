@@ -74,7 +74,7 @@ public class IndexController {
 
     @GetMapping("/logout")
     public String logout(Model pModel, RedirectAttributes pRedirectAttributes, HttpSession pSession){
-        return "redirect:/";
+        return "redirect:/login";
     }
 
 }
