@@ -1,10 +1,7 @@
 package fr.almeri.beerboard.models;
 
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.Table;
+import javax.persistence.*;
 import java.io.Serializable;
 import java.util.Objects;
 
@@ -13,6 +10,7 @@ import java.util.Objects;
 public class Utilisateur implements Serializable {
 
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer idUtilisateur;
 
     @Column(name="prenom_utilisateur")
@@ -26,6 +24,9 @@ public class Utilisateur implements Serializable {
 
     @Column(name="mdp_utilisateur")
     private String mdpUtilisateur;
+
+    @Column(name="salt")
+    private byte[] salt;
 
     public String getPrenomUtilisateur() {
         return prenomUtilisateur;
@@ -65,6 +66,14 @@ public class Utilisateur implements Serializable {
 
     public void setMdpUtilisateur(String pMdpUtilisateur) {
         this.mdpUtilisateur = pMdpUtilisateur;
+    }
+
+    public byte[] getSalt() {
+        return salt;
+    }
+
+    public void setSalt(byte[] pSalt) {
+        this.salt = pSalt;
     }
 
     @Override

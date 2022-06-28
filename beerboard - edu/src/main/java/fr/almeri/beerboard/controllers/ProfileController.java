@@ -1,5 +1,6 @@
 package fr.almeri.beerboard.controllers;
 
+//import fr.almeri.beerboard.Utils;
 import fr.almeri.beerboard.models.BiereId;
 import fr.almeri.beerboard.models.Brasserie;
 import fr.almeri.beerboard.models.Region;
@@ -15,6 +16,10 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import javax.servlet.http.HttpSession;
+import java.security.MessageDigest;
+import java.security.NoSuchAlgorithmException;
+import java.security.NoSuchProviderException;
+import java.security.SecureRandom;
 import java.util.ArrayList;
 
 @Controller
@@ -37,9 +42,33 @@ public class ProfileController {
                 return "redirect:/index";
             }
         }
-        redir.addFlashAttribute("msg", "Informations de connexion incorrect.");
+        redir.addFlashAttribute("msg", "Le login et/ou le mot de passe est/sont erronés.");
         return "redirect:/";
     }
+
+//    @PostMapping("/connect-user")
+//    public String connectUtilisateur(@ModelAttribute Utilisateur utilisateur, HttpSession session, Model model) throws NoSuchAlgorithmException, NoSuchFieldException, NoSuchProviderException {
+//
+//        // Vérification au niveau de la base de données.
+//        boolean isOk = this.checkPassword(utilisateur);
+//        if (isOk)
+//        {
+//            // Hachage de mot de passe
+//            utilisateur.setSalt(Utils.getSalt());
+//            utilisateur.setMdpUtilisateur(Utils.hashMD5withSalt(utilisateur.getMdpUtilisateur(), utilisateur.getSalt()));
+//            utilisateurRepository.save(utilisateur);
+//            // Démarre une session
+//            // Création d'une session avec
+//            // utilisateur connecté
+//            session.setAttribute("infoConnexion", utilisateur);
+//            session.setMaxInactiveInterval(60);
+//            // Si connexion Ok
+//            return "redirect:/index";
+//        } else {
+//            model.addAttribute("isBad", true);
+//            return "redirect:/";
+//        }
+//    }
 
     @GetMapping("/motdepasse")
     public String motdepasse(Model pModel) {
@@ -80,4 +109,21 @@ public class ProfileController {
             return "redirect:/register";
         }
     }
+//    private boolean checkPassword(Utilisateur utilisateur) throws NoSuchAlgorithmException, NoSuchFieldException, NoSuchProviderException {
+//        // On cherche le user en BDD à l'aide de son login
+//        Utilisateur u = utilisateurRepository.compteExistant(utilisateur.getEmailUtilisateur());
+//
+//        // Si mot de passe ne correspond pas
+//        if (u == null)
+//        {
+//            return false;
+//        }
+//
+//        // Chiffrage du mot de passe saisi par l'utilisateur
+//        // Pour comparaison
+//        String newPass = Utils.hashMD5withSalt(utilisateur.getMdpUtilisateur(), u.getSalt());
+//
+//        // Retourne True si mot de passe saisi == mot de passe de la base de données
+//        return newPass.equals(u.getMdpUtilisateur());
+//    }
 }
