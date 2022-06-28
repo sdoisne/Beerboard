@@ -25,8 +25,8 @@ public class Utilisateur implements Serializable {
     @Column(name="mdp_utilisateur")
     private String mdpUtilisateur;
 
-    @Column(name="salt")
-    private byte[] salt;
+//    @Column(name="salt")
+//    private byte[] salt;
 
     public String getPrenomUtilisateur() {
         return prenomUtilisateur;
@@ -68,13 +68,13 @@ public class Utilisateur implements Serializable {
         this.mdpUtilisateur = pMdpUtilisateur;
     }
 
-    public byte[] getSalt() {
-        return salt;
-    }
-
-    public void setSalt(byte[] pSalt) {
-        this.salt = pSalt;
-    }
+//    public byte[] getSalt() {
+//        return salt;
+//    }
+//
+//    public void setSalt(byte[] pSalt) {
+//        this.salt = pSalt;
+//    }
 
     @Override
     public boolean equals(Object o) {
